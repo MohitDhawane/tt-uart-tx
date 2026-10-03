@@ -20,21 +20,27 @@ submission from a repository.
 | Timing (post-route RCX) | ss setup / ff hold | +5.21 ns / +0.05 ns |
 | Gate-level tests (same cocotb tests on the routed Sky130 netlist) | Icarus + PDK cell models | 4/4 pass |
 
-## Not yet verified
+## Tiny Tapeout checks (GitHub Actions, 2026-10-03)
 
-Tiny Tapeout's own GitHub Actions: LibreLane hardening into the 1×1 tile,
-the Tiny Tapeout precheck, and their gate-level test. These could not run in
-the build environment (its network blocks the LibreLane container image).
-They run automatically on every push once this is its own repository.
+Run on [MohitDhawane/tt-uart-tx](https://github.com/MohitDhawane/tt-uart-tx/actions)
+with the official `ttsky26d` actions:
+
+| Job | Result |
+|---|---|
+| `gds`: LibreLane 3.0.14 hardening into the 1×1 tile | pass |
+| `precheck`: Tiny Tapeout DRC, pin, power and layer checks | pass |
+| `gl_test`: cocotb tests on the hardened gate-level netlist | pass |
+| `test`: cocotb RTL tests | pass |
+| `docs`: datasheet | pass |
+| `viewer`: 3D preview on GitHub Pages | needs Pages enabled (Settings → Pages → Source: GitHub Actions) |
 
 ## Submit it
 
-1. Create a new public GitHub repository (for example `tt-uart-tx`) and copy
-   the contents of this directory to its root, including `.github/`.
-2. In the repository settings, enable GitHub Actions and set Pages to deploy
-   from GitHub Actions.
-3. Push. Check that the `gds`, `test` and `docs` workflows go green.
-4. Submit the repository at <https://app.tinytapeout.com> for the open
+1. Done: the project is in https://github.com/MohitDhawane/tt-uart-tx and its
+   checks are green.
+2. Optional: enable Pages (Settings → Pages → Source: GitHub Actions) and
+   re-run the `gds` workflow for the preview.
+3. Submit the repository at <https://app.tinytapeout.com> for the open
    Sky130 shuttle.
 
 ## Licence
